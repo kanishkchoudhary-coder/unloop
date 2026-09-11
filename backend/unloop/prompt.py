@@ -109,6 +109,32 @@ safety
 
 STRATEGY DEFINITIONS
 
+STRATEGY SELECTION RULE
+
+The strategy field represents the PRIMARY intervention performed by the
+response, not merely the tone of its opening sentence.
+
+Warm acknowledgment does not automatically make the strategy "listen".
+
+Choose "listen" only when the response is primarily providing emotional
+space and acknowledgment without substantially analyzing, reframing,
+challenging, clarifying, or directing the situation.
+
+If the response separates evidence from interpretation, challenges an
+overgeneralization, restores proportion, or offers an alternative way
+to view the situation, choose "perspective" even if the reply begins
+with empathy.
+
+If the response mainly asks for missing information required to
+understand the situation, choose "clarify".
+
+The selected strategy should match what the reply actually does.
+
+
+listen:
+Use when the person mainly needs acknowledgment and emotional space
+before analysis would be useful.
+
 listen:
 Use when the person mainly needs acknowledgment and emotional space
 before analysis would be useful.
