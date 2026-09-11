@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Unloop helps adults move from repetitive overthinking toward grounded perspective, uncertainty acceptance, and real-world agency."
+    >
+
+    <meta
+        name="theme-color"
+        content="#f4f1e9"
+    >
+
+    <meta
+        name="color-scheme"
+        content="light"
+    >
+
+    <title>
+        Unloop — From Overthinking to Agency
+    </title>
+
+    <link
+        rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2224%22 fill=%22%23222326%22/><text x=%2250%22 y=%2268%22 font-size=%2258%22 text-anchor=%22middle%22 fill=%22white%22 font-family=%22Arial%22>U</text></svg>"
+    >
+
+    <link
+        rel="stylesheet"
+        href="styles.css"
+    >
+</head>
+
+
+<body>
+
+    <!-- Decorative background only -->
+    <div
+        class="background-orb orb-one"
+        aria-hidden="true"
+    ></div>
+
+    <div
+        class="background-orb orb-two"
+        aria-hidden="true"
+    ></div>
+
+
+    <main id="app">
+
+        <div class="app-shell">
+
+
+            <!-- =====================================================
+                 HEADER
+            ====================================================== -->
+
+            <header class="app-header">
+
+                <div class="brand">
+
+                    <div
+                        class="brand-mark"
+                        aria-hidden="true"
+                    >
+                        U
+                    </div>
+
+                    <div>
+                        <h1>Unloop</h1>
+
+                        <p>
+                            From overthinking to agency.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="session-badge"
+                    title="Conversation context is kept only for this temporary browser session."
+                >
+
+                    <span
+                        class="status-dot"
+                        aria-hidden="true"
+                    ></span>
+
+                    <span>
+                        Temporary session
+                    </span>
+
+                </div>
+
+            </header>
+
+
+
+            <!-- =====================================================
+                 CONVERSATION
+            ====================================================== -->
+
+            <section
+                class="conversation-panel"
+                aria-labelledby="conversation-title"
+            >
+
+                <div class="conversation-header">
+
+                    <p class="section-eyebrow">
+                        CONVERSATION
+                    </p>
+
+                    <h2 id="conversation-title">
+                        What's looping in your head?
+                    </h2>
+
+                    <p class="section-description">
+                        Start wherever makes sense.
+                        You don't need to explain it perfectly.
+                        Unloop will help separate what happened,
+                        what it may mean, and what is still unknown.
+                    </p>
+
+                </div>
+
+
+                <!-- Conversation history -->
+
+                <div
+                    id="messages"
+                    class="messages"
+                    role="log"
+                    aria-live="polite"
+                    aria-relevant="additions"
+                    aria-label="Conversation with Unloop"
+                >
+
+                    <div class="message-row assistant-row">
+
+                        <div
+                            class="assistant-avatar"
+                            aria-hidden="true"
+                        >
+                            U
+                        </div>
+
+                        <div class="message message-assistant">
+                            <p>
+                                What's on your mind?
+                            </p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Thinking / loading state -->
+
+                <div
+                    id="typing-indicator"
+                    class="typing-indicator hidden"
+                    role="status"
+                    aria-live="polite"
+                    aria-atomic="true"
+                >
+
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+
+                    <p>
+                        Thinking this through…
+                    </p>
+
+                </div>
+
+
+                <!-- Error state -->
+
+                <div
+                    id="error-box"
+                    class="error-box hidden"
+                    role="alert"
+                    aria-live="assertive"
+                    aria-atomic="true"
+                >
+
+                    <div>
+                        <strong>
+                            Something went wrong.
+                        </strong>
+
+                        <p>
+                            Your message is still here.
+                            You can safely try again.
+                        </p>
+                    </div>
+
+
+                    <button
+                        id="retry-button"
+                        type="button"
+                        class="secondary-button"
+                    >
+                        Try again
+                    </button>
+
+                </div>
+
+
+                <!-- Message input -->
+
+                <form
+                    id="message-form"
+                    class="message-form"
+                    autocomplete="off"
+                >
+
+                    <label
+                        for="message-input"
+                        class="sr-only"
+                    >
+                        Message Unloop
+                    </label>
+
+
+                    <div class="input-wrapper">
+
+                        <textarea
+                            id="message-input"
+                            name="message"
+                            rows="2"
+                            maxlength="3000"
+                            placeholder="Tell me what happened..."
+                            aria-describedby="message-input-hint"
+                            spellcheck="true"
+                            required
+                        ></textarea>
+
+
+                        <div class="input-footer">
+
+                            <span
+                                id="message-input-hint"
+                                class="input-hint"
+                            >
+                                Enter to send · Shift + Enter for a new line
+                            </span>
+
+
+                            <button
+                                id="send-button"
+                                type="submit"
+                                class="send-button"
+                                aria-label="Send message"
+                            >
+
+                                <span>
+                                    Send
+                                </span>
+
+                                <span
+                                    class="send-arrow"
+                                    aria-hidden="true"
+                                >
+                                    →
+                                </span>
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </form>
+
+            </section>
+
+
+
+            <!-- =====================================================
+                 REALITY MIRROR
+            ====================================================== -->
+
+            <section
+                id="mirror"
+                class="mirror-panel hidden-panel"
+                aria-labelledby="mirror-title"
+            >
+
+                <div class="mirror-header">
+
+                    <div
+                        class="section-number"
+                        aria-hidden="true"
+                    >
+                        01
+                    </div>
+
+
+                    <div>
+
+                        <p class="section-eyebrow">
+                            REALITY MIRROR
+                        </p>
+
+                        <h2 id="mirror-title">
+                            Let's separate what happened from what it might mean.
+                        </h2>
+
+                        <p>
+                            This is Unloop's current understanding,
+                            not a verdict.
+                            You can correct it.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="mirror-grid">
+
+
+                    <!-- Reported -->
+
+                    <article class="mirror-card reported-card">
+
+                        <div class="card-label">
+
+                            <span
+                                class="card-dot"
+                                aria-hidden="true"
+                            ></span>
+
+                            What you reported
+
+                        </div>
+
+                        <p id="reported">
+                            —
+                        </p>
+
+                    </article>
+
+
+
+                    <!-- Interpretation -->
+
+                    <article class="mirror-card interpretation-card">
+
+                        <div class="card-label">
+
+                            <span
+                                class="card-dot"
+                                aria-hidden="true"
+                            ></span>
+
+                            What it may mean to you
+
+                        </div>
+
+                        <p id="interpretation">
+                            —
+                        </p>
+
+                    </article>
+
+
+
+                    <!-- Unknown -->
+
+                    <article class="mirror-card unknown-card">
+
+                        <div class="card-label">
+
+                            <span
+                                class="card-dot"
+                                aria-hidden="true"
+                            ></span>
+
+                            What we don't know
+
+                        </div>
+
+                        <p id="unknown">
+                            —
+                        </p>
+
+                    </article>
+
+                </div>
+
+
+                <!-- Mirror correction -->
+
+                <div class="mirror-confirmation">
+
+                    <div>
+
+                        <strong>
+                            Is this roughly what you're struggling with?
+                        </strong>
+
+                        <p>
+                            You're the authority on your own experience.
+                        </p>
+
+                    </div>
+
+
+                    <div
+                        class="mirror-actions"
+                        aria-label="Reality Mirror feedback"
+                    >
+
+                        <button
+                            id="mirror-not-quite"
+                            type="button"
+                            class="secondary-button"
+                        >
+                            Not quite
+                        </button>
+
+
+                        <button
+                            id="mirror-yes"
+                            type="button"
+                            class="primary-button"
+                        >
+                            Yes, that's right
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =====================================================
+                 CLOSE THE LOOP
+            ====================================================== -->
+
+            <section
+                id="close-loop"
+                class="close-panel hidden-panel"
+                aria-labelledby="close-title"
+            >
+
+                <div class="close-header">
+
+                    <div
+                        class="section-number"
+                        aria-hidden="true"
+                    >
+                        02
+                    </div>
+
+
+                    <div>
+
+                        <p class="section-eyebrow">
+                            CLOSE THE LOOP
+                        </p>
+
+                        <h2 id="close-title">
+                            More thinking may not give you more information.
+                        </h2>
+
+                        <p id="close-summary">
+                            We've returned to the same uncertainty
+                            without meaningful new evidence.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="close-grid">
+
+
+                    <article class="close-item">
+
+                        <span>
+                            What seems clear
+                        </span>
+
+                        <p id="close-clear">
+                            —
+                        </p>
+
+                    </article>
+
+
+
+                    <article class="close-item">
+
+                        <span>
+                            What remains unknown
+                        </span>
+
+                        <p id="close-unknown">
+                            —
+                        </p>
+
+                    </article>
+
+
+
+                    <article class="close-item">
+
+                        <span>
+                            What may be useful
+                        </span>
+
+                        <p id="close-useful">
+                            —
+                        </p>
+
+                    </article>
+
+                </div>
+
+
+                <div class="close-actions">
+
+                    <button
+                        id="close-here"
+                        type="button"
+                        class="primary-button"
+                    >
+                        Close here
+                    </button>
+
+
+                    <button
+                        id="next-step"
+                        type="button"
+                        class="secondary-button"
+                    >
+                        One useful next step
+                    </button>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =====================================================
+                 PRODUCT BOUNDARIES
+            ====================================================== -->
+
+            <footer class="app-footer">
+
+                <span>
+                    18+ prototype
+                </span>
+
+                <span
+                    class="footer-dot"
+                    aria-hidden="true"
+                >
+                    •
+                </span>
+
+                <span>
+                    Not therapy, diagnosis, or emergency care
+                </span>
+
+                <span
+                    class="footer-dot"
+                    aria-hidden="true"
+                >
+                    •
+                </span>
+
+                <span>
+                    Temporary browser session
+                </span>
+
+            </footer>
+
+        </div>
+
+    </main>
+
+
+
+    <!-- =========================================================
+         JAVASCRIPT DISABLED FALLBACK
+    ========================================================== -->
+
+    <noscript>
+
+        <div
+            style="
+                max-width: 680px;
+                margin: 24px auto;
+                padding: 16px;
+                font-family: sans-serif;
+                text-align: center;
+            "
+        >
+            Unloop requires JavaScript to run this prototype.
+        </div>
+
+    </noscript>
+
+
+
+    <!-- =========================================================
+         APP SCRIPT
+    ========================================================== -->
+
+    <script src="app.js"></script>
+
+</body>
+
+</html>
