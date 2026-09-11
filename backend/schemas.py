@@ -1,6 +1,6 @@
 from typing import Literal
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 
 class StrictModel(BaseModel):
@@ -99,3 +99,29 @@ class CoreEngineResponse(StrictModel):
     safety_route: SafetyRoute
 
     rolling_summary: str
+
+    @model_validator(mode="after")
+    def validate_ready_mirror(self) -> "CoreEngineResponse":
+        if not self.mirror_ready:
+            return self
+
+        mirror_fields = {
+            "reported": self.mirror.reported,
+            "interpretation": self.mirror.interpretation,
+            "unknown": self.mirror.unknown,
+        }
+
+        for field_name, value in mirror_fields.items():
+            if not value:
+                raise ValueError(
+                    f"mirror.{field_name} cannot be empty when "
+                    "mirror_ready is true."
+                )
+
+            if not value.endswith((".", "!", "?")):
+                raise ValueError(
+                    f"mirror.{field_name} must end with sentence "
+                    "punctuation when mirror_ready is true."
+                )
+
+        return self
