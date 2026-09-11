@@ -54,9 +54,30 @@ class CoreEngineRequest(StrictModel):
 
 
 class RealityMirror(StrictModel):
-    reported: str = ""
-    interpretation: str = ""
-    unknown: str = ""
+    reported: str = Field(
+        default="",
+        description=(
+            "A complete, concise statement of what the user directly reported "
+            "happened, was said, observed, or experienced. Never end mid-thought."
+        ),
+    )
+
+    interpretation: str = Field(
+        default="",
+        description=(
+            "A complete, concise statement of the inference, assumption, "
+            "generalization, prediction, or meaning the user may be drawing "
+            "from the reported facts. Never truncate or end mid-thought."
+        ),
+    )
+
+    unknown: str = Field(
+        default="",
+        description=(
+            "A complete, concise statement of what cannot currently be known "
+            "from the available evidence. Never truncate or end mid-thought."
+        ),
+    )
 
 
 class CoreEngineResponse(StrictModel):
