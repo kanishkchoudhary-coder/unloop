@@ -15,4 +15,4 @@ venv/
 
 # Operating system
 .DS_Store
-Thumbs.db
+Thumbs.db.vscode/
